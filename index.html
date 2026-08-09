@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sada Adda — Chai &amp; Qehwa House, Lahore</title>
+<meta name="description" content="Sada Adda — a chai and qehwa spot in Lahore. Come sit, stay a while.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;600;700&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B1815;
+    --ink-soft:#26221D;
+    --parchment:#F1E7D0;
+    --cream:#EDE3CF;
+    --saffron:#D89B2C;
+    --clay:#A64B2A;
+    --cardamom:#6B7A5E;
+    --line: rgba(241,231,208,0.14);
+    --display: 'Zilla Slab', serif;
+    --body: 'Work Sans', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--cream);
+    font-family:var(--body);
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+
+  ::selection{ background:var(--saffron); color:var(--ink); }
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--saffron);
+    outline-offset:3px;
+  }
+
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 24px; }
+
+  /* NAV */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 28px;
+    background:linear-gradient(to bottom, rgba(27,24,21,0.92), rgba(27,24,21,0));
+    backdrop-filter:blur(2px);
+  }
+  .brand{
+    font-family:var(--display); font-weight:700; font-size:1.25rem;
+    letter-spacing:0.02em;
+  }
+  .brand span{ color:var(--saffron); }
+  nav ul{
+    display:flex; gap:32px; list-style:none;
+  }
+  nav ul li a{
+    font-size:0.85rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--cream); opacity:0.75; transition:opacity 0.2s;
+  }
+  nav ul li a:hover{ opacity:1; color:var(--saffron); }
+  .nav-toggle{ display:none; background:none; border:none; color:var(--cream); font-size:1.5rem; cursor:pointer; }
+
+  /* HERO */
+  .hero{
+    min-height:100svh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    position:relative;
+    padding:120px 24px 80px;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(216,155,44,0.10), transparent 60%),
+      var(--ink);
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:0.75rem; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--saffron); margin-bottom:22px; opacity:0.9;
+  }
+  .hero h1{
+    font-family:var(--display); font-weight:700;
+    font-size:clamp(3.2rem, 10vw, 7rem);
+    line-height:0.95; letter-spacing:-0.01em;
+    color:var(--parchment);
+  }
+  .hero h1 em{ font-style:normal; color:var(--saffron); }
+  .hero p.tag{
+    margin-top:26px; font-size:clamp(1rem, 2vw, 1.2rem);
+    max-width:480px; color:var(--cream); opacity:0.85;
+  }
+  .hero .urdu{
+    font-family:var(--display); font-size:1rem; opacity:0.55; margin-top:10px; letter-spacing:0.04em;
+  }
+  .cta-row{
+    display:flex; gap:16px; margin-top:40px; flex-wrap:wrap; justify-content:center;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:14px 28px; border-radius:2px;
+    font-size:0.9rem; letter-spacing:0.04em; font-weight:500;
+    border:1px solid transparent; cursor:pointer;
+    transition:transform 0.15s ease, background 0.2s ease, border-color .2s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-primary{ background:var(--saffron); color:var(--ink); }
+  .btn-primary:hover{ background:#e5ab3c; }
+  .btn-ghost{ border-color:var(--line); color:var(--cream); }
+  .btn-ghost:hover{ border-color:var(--saffron); color:var(--saffron); }
+
+  /* steam cup signature */
+  .cup-wrap{
+    position:relative; width:120px; height:150px; margin:56px auto 0;
+  }
+  .cup{
+    position:absolute; bottom:0; left:50%; transform:translateX(-50%);
+    width:86px; height:56px;
+    background:var(--clay);
+    border-radius:0 0 40px 40px / 0 0 30px 30px;
+    box-shadow: inset 0 -10px 14px rgba(0,0,0,0.25);
+  }
+  .cup::before{
+    content:""; position:absolute; top:-8px; left:0; right:0; height:14px;
+    background:var(--clay); border-radius:50%;
+  }
+  .cup::after{
+    content:""; position:absolute; top:-2px; left:8px; right:8px; height:8px;
+    background:#8C3F22; border-radius:50%;
+  }
+  .steam{
+    position:absolute; bottom:56px; width:3px; height:60px;
+    background:linear-gradient(to top, rgba(241,231,208,0.5), transparent);
+    border-radius:3px; opacity:0;
+    animation:rise 3.2s ease-in infinite;
+  }
+  .steam:nth-child(1){ left:38px; animation-delay:0s; }
+  .steam:nth-child(2){ left:58px; animation-delay:1s; }
+  .steam:nth-child(3){ left:78px; animation-delay:2s; }
+  @keyframes rise{
+    0%{ transform:translateY(0) translateX(0) scaleY(0.6); opacity:0; }
+    20%{ opacity:0.7; }
+    100%{ transform:translateY(-70px) translateX(6px) scaleY(1.3); opacity:0; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .steam{ animation:none; opacity:0.3; }
+    html{ scroll-behavior:auto; }
+  }
+
+  .scroll-cue{
+    position:absolute; bottom:28px; left:50%; transform:translateX(-50%);
+    font-family:var(--mono); font-size:0.7rem; letter-spacing:0.15em;
+    color:var(--cream); opacity:0.45; text-transform:uppercase;
+  }
+
+  section{ padding:110px 0; position:relative; }
+  .section-head{ margin-bottom:56px; }
+  .kicker{
+    font-family:var(--mono); font-size:0.72rem; letter-spacing:0.18em;
+    text-transform:uppercase; color:var(--saffron); margin-bottom:14px; display:block;
+  }
+  h2{
+    font-family:var(--display); font-weight:700;
+    font-size:clamp(2rem, 5vw, 3rem); color:var(--parchment);
+    max-width:640px;
+  }
+
+  /* ABOUT */
+  .about{ border-top:1px solid var(--line); }
+  .about-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:64px; align-items:center;
+  }
+  .about p{ font-size:1.05rem; color:var(--cream); opacity:0.85; max-width:46ch; margin-top:18px; }
+  .about-stats{
+    display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:40px;
+  }
+  .stat-num{ font-family:var(--display); font-size:2.2rem; color:var(--saffron); }
+  .stat-label{ font-family:var(--mono); font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; opacity:0.6; margin-top:4px; }
+  .about-visual{
+    aspect-ratio:4/5; background:
+      linear-gradient(160deg, var(--ink-soft), #14110E);
+    border:1px solid var(--line);
+    position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .about-visual .ring{
+    width:60%; aspect-ratio:1; border-radius:50%;
+    border:1px dashed rgba(216,155,44,0.4);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .about-visual .ring span{
+    font-family:var(--display); font-size:0.9rem; letter-spacing:0.1em; text-align:center;
+    color:var(--saffron); opacity:0.8; text-transform:uppercase;
+  }
+
+  /* MENU */
+  .menu{ background:var(--ink-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .menu-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:40px;
+  }
+  .menu-card{ border-top:2px solid var(--saffron); padding-top:20px; }
+  .menu-card h3{
+    font-family:var(--display); font-size:1.3rem; color:var(--parchment); margin-bottom:18px;
+  }
+  .menu-item{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:12px 0; border-bottom:1px dashed var(--line);
+    font-size:0.95rem;
+  }
+  .menu-item:last-child{ border-bottom:none; }
+  .menu-item .name{ color:var(--cream); }
+  .menu-item .desc{ display:block; font-size:0.78rem; opacity:0.55; margin-top:2px; }
+  .menu-item .price{ font-family:var(--mono); color:var(--saffron); white-space:nowrap; padding-left:12px; }
+
+  /* VISIT */
+  .visit{ border-bottom:1px solid var(--line); }
+  .visit-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:64px;
+  }
+  .ticket{
+    background:var(--parchment); color:var(--ink); padding:36px;
+    position:relative; font-family:var(--mono);
+  }
+  .ticket::before, .ticket::after{
+    content:""; position:absolute; width:24px; height:24px; background:var(--ink);
+    border-radius:50%; top:50%; transform:translateY(-50%);
+  }
+  .ticket::before{ left:-12px; }
+  .ticket::after{ right:-12px; }
+  .ticket-row{
+    display:flex; justify-content:space-between;
+    padding:10px 0; border-bottom:1px dashed rgba(27,24,21,0.25);
+    font-size:0.85rem;
+  }
+  .ticket-row:last-child{ border-bottom:none; }
+  .ticket-row .k{ opacity:0.6; text-transform:uppercase; letter-spacing:0.06em; font-size:0.72rem; }
+  .visit-copy p{ color:var(--cream); opacity:0.85; margin-top:16px; max-width:46ch; }
+  .map-note{
+    margin-top:28px; padding:18px 20px; border:1px solid var(--line);
+    font-size:0.85rem; opacity:0.75;
+  }
+
+  /* FOOTER */
+  footer{ padding:60px 0 40px; }
+  .footer-grid{
+    display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px;
+  }
+  footer .brand{ font-size:1.4rem; }
+  .footer-links{ display:flex; gap:24px; list-style:none; }
+  .footer-links a{ font-size:0.85rem; opacity:0.7; }
+  .footer-links a:hover{ opacity:1; color:var(--saffron); }
+  .footer-bottom{
+    margin-top:40px; padding-top:24px; border-top:1px solid var(--line);
+    font-family:var(--mono); font-size:0.72rem; opacity:0.5;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+
+  /* reveal on scroll */
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  @media (max-width: 860px){
+    .about-grid, .visit-grid{ grid-template-columns:1fr; }
+    .menu-grid{ grid-template-columns:1fr; gap:44px; }
+    nav ul{
+      position:fixed; top:0; right:0; height:100vh; width:min(78vw,300px);
+      background:var(--ink-soft); flex-direction:column; padding:100px 32px; gap:26px;
+      transform:translateX(100%); transition:transform 0.3s ease; border-left:1px solid var(--line);
+    }
+    nav ul.open{ transform:translateX(0); }
+    .nav-toggle{ display:block; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="#top">Sada <span>Adda</span></a>
+  <ul id="navlinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+</nav>
+
+<header class="hero" id="top">
+  <span class="eyebrow">Lahore · Since 2024</span>
+  <h1>Sit a while,<br><em>chai's on</em> the way</h1>
+  <p class="tag">A small chai &amp; qehwa spot for long conversations, slow evenings, and the second cup you didn't plan on.</p>
+  <p class="urdu">سدا آڈا — ہمیشہ کا اڈا</p>
+
+  <div class="cup-wrap" aria-hidden="true">
+    <span class="steam"></span>
+    <span class="steam"></span>
+    <span class="steam"></span>
+    <div class="cup"></div>
+  </div>
+
+  <div class="cta-row">
+    <a class="btn btn-primary" href="https://wa.me/923000000000" target="_blank" rel="noopener">Order on WhatsApp</a>
+    <a class="btn btn-ghost" href="#menu">See the menu</a>
+  </div>
+
+  <span class="scroll-cue">Scroll ↓</span>
+</header>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <span class="kicker">The Adda</span>
+      <h2>Not a café. An adda.</h2>
+      <p>An <em>adda</em> is what you call the spot where you always end up — not because it's fancy, but because it's yours. Sada Adda started as a stall with two kettles and six stools on a Gulberg side street. It's grown a roof and a menu since, but the stools are still the same six.</p>
+      <div class="about-stats">
+        <div>
+          <div class="stat-num">02</div>
+          <div class="stat-label">Kettles, always going</div>
+        </div>
+        <div>
+          <div class="stat-num">14</div>
+          <div class="stat-label">Blends on rotation</div>
+        </div>
+        <div>
+          <div class="stat-num">6AM</div>
+          <div class="stat-label">First doodh patti</div>
+        </div>
+        <div>
+          <div class="stat-num">MID</div>
+          <div class="stat-label">Nightowl qehwa</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual reveal">
+      <div class="ring"><span>Two kettles,<br>one adda</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">On the board today</span>
+      <h2>What's brewing</h2>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card reveal">
+        <h3>Chai</h3>
+        <div class="menu-item">
+          <span class="name">Doodh Patti<span class="desc">Strong, milky, no apologies</span></span>
+          <span class="price">Rs 150</span>
+        </div>
+        <div class="menu-item">
+          <span class="name">Karak Chai<span class="desc">Extra strong, less milk</span></span>
+          <span class="price">Rs 160</span>
+        </div>
+        <div class="menu-item">
+          <span class="name">Elaichi Chai<span class="desc">Cardamom-forward</span></span>
+          <span class="price">Rs 170</span>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <h3>Qehwa</h3>
+        <div class="menu-item">
+          <span class="name">Kashmiri Qehwa<span class="desc">Saffron, almond, rose</span></span>
+          <span class="price">Rs 220</span>
+        </div>
+        <div class="menu-item">
+          <span class="name">Peshawari Qehwa<span class="desc">Green tea, no sugar</span></span>
+          <span class="price">Rs 180</span>
+        </div>
+        <div class="menu-item">
+          <span class="name">Zafrani Qehwa<span class="desc">Extra saffron, honey</span></span>
+          <span class="price">Rs 240</span>
+        </div>
+      </div>
+      <div class="menu-card reveal">
+        <h3>With Chai</h3>
+        <div class="menu-item">
+          <span class="name">Rusk<span class="desc">Toasted, per plate</span></span>
+          <span class="price">Rs 120</span>
+        </div>
+        <div class="menu-item">
+          <span class="name">Namak Paray<span class="desc">Crisp, salty, addictive</span></span>
+          <span class="price">Rs 140</span>
+        </div>
+        <div class="menu-item">
+          <span class="name">Bun Makhan<span class="desc">Toasted bun, extra butter</span></span>
+          <span class="price">Rs 160</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="wrap visit-grid">
+    <div class="visit-copy reveal">
+      <span class="kicker">Find the adda</span>
+      <h2>We're open till the last cup</h2>
+      <p>No reservations, no queue system — just come. If the stools are full, we'll pull up a crate.</p>
+      <div class="map-note">
+        📍 Y-Block Commercial Area, near the DHA Gulberg link road, Lahore
+      </div>
+    </div>
+    <div class="ticket reveal">
+      <div class="ticket-row"><span class="k">Mon–Fri</span><span>6:00 AM – 1:00 AM</span></div>
+      <div class="ticket-row"><span class="k">Sat–Sun</span><span>6:00 AM – 2:00 AM</span></div>
+      <div class="ticket-row"><span class="k">Delivery</span><span>via WhatsApp order</span></div>
+      <div class="ticket-row"><span class="k">Seating</span><span>6 stools + 2 crates</span></div>
+      <div class="ticket-row"><span class="k">Wifi</span><span>sadaadda_free</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <a class="brand" href="#top">Sada <span style="color:var(--saffron)">Adda</span></a>
+      <ul class="footer-links">
+        <li><a href="https://wa.me/923000000000" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="#" onclick="return false">Instagram</a></li>
+        <li><a href="mailto:hello@sadaadda.pk">Email</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom wrap" style="padding:0;">
+      <span>© 2026 Sada Adda, Lahore</span>
+      <span>Built by Muhammad Umar Sarwar</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // mobile nav toggle
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navlinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  // scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
